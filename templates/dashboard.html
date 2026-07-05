@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="dashboard">
+
+    <div class="sidebar">
+        <h3>Statistics</h3>
+        <p>Total Resumes: {{ total }}</p>
+        <p>Top Score: {{ top_score }}</p>
+    </div>
+
+    <div class="main">
+        <h2>Ranking Results</h2>
+
+        <table>
+            <tr>
+                <th>Rank</th>
+                <th>Resume Name</th>
+                <th>Score</th>
+            </tr>
+
+            {% for name, score in results %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ name }}</td>
+                <td>{{ score }}</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>

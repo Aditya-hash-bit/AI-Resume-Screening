@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Candidate Dashboard</title>
+
+<style>
+
+body{
+font-family:Arial;
+margin:0;
+background:linear-gradient(120deg,#89f7fe,#66a6ff);
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.container{
+width:750px;
+background:white;
+padding:30px;
+border-radius:12px;
+box-shadow:0 8px 25px rgba(0,0,0,0.2);
+text-align:center;
+}
+
+h2{
+color:#333;
+}
+
+input,select{
+width:80%;
+padding:10px;
+margin:10px;
+border-radius:6px;
+border:1px solid #ccc;
+}
+
+button{
+padding:10px 20px;
+background:#3498db;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#2980b9;
+}
+
+table{
+width:100%;
+margin-top:20px;
+border-collapse:collapse;
+}
+
+th,td{
+padding:10px;
+border:1px solid #ddd;
+}
+
+th{
+background:#3498db;
+color:white;
+}
+
+.approved{
+color:green;
+font-weight:bold;
+}
+
+.rejected{
+color:red;
+font-weight:bold;
+}
+
+.pending{
+color:orange;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Candidate Dashboard</h2>
+
+<form action="/upload_resume" method="POST" enctype="multipart/form-data">
+
+<input type="file" name="resume" required>
+
+<br>
+
+<select name="company">
+
+{% for hr in companies %}
+<option value="{{ hr.company }}">{{ hr.company }}</option>
+{% endfor %}
+
+</select>
+
+<br>
+
+<button type="submit">Upload Resume</button>
+
+</form>
+
+<h3>Your Applications</h3>
+
+<table>
+
+<tr>
+<th>Company</th>
+<th>Score</th>
+<th>Status</th>
+</tr>
+
+{% for app in applications %}
+
+<tr>
+
+<td>{{ app.company }}</td>
+
+<td>{{ app.score }}/10</td>
+
+<td>
+
+{% if app.status == "Approved" %}
+<span class="approved">Approved</span>
+{% endif %}
+
+{% if app.status == "Rejected" %}
+<span class="rejected">Rejected</span>
+{% endif %}
+
+{% if app.status == "Pending" %}
+<span class="pending">Pending</span>
+{% endif %}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>

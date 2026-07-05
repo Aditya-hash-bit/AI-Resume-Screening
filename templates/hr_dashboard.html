@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>HR Dashboard</title>
+
+<style>
+
+body{
+font-family:Arial;
+margin:0;
+background:linear-gradient(120deg,#f6d365,#fda085);
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.container{
+width:900px;
+background:white;
+padding:30px;
+border-radius:12px;
+box-shadow:0 8px 25px rgba(0,0,0,0.2);
+text-align:center;
+}
+
+h2{
+color:#333;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+th,td{
+padding:10px;
+border:1px solid #ddd;
+}
+
+th{
+background:#ff7e5f;
+color:white;
+}
+
+a{
+padding:6px 10px;
+border-radius:5px;
+color:white;
+text-decoration:none;
+font-size:14px;
+}
+
+.view{
+background:#3498db;
+}
+
+.approve{
+background:green;
+}
+
+.reject{
+background:red;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>HR Dashboard</h2>
+
+<table>
+
+<tr>
+<th>Candidate</th>
+<th>Score</th>
+<th>Status</th>
+<th>Resume</th>
+<th>Action</th>
+</tr>
+
+{% for c in candidates %}
+
+<tr>
+
+<td>{{ c.username }}</td>
+
+<td>{{ c.score }}/10</td>
+
+<td>{{ c.status }}</td>
+
+<td>
+<a class="view" href="/view_resume/{{ c.resume_filename }}">View</a>
+</td>
+
+<td>
+<a class="approve" href="/approve/{{ c.id }}">Accept</a>
+<a class="reject" href="/reject/{{ c.id }}">Reject</a>
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+
+</html>
